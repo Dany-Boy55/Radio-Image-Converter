@@ -19,7 +19,7 @@ namespace SimpleImages
         /// <param name="sourceImage"> Image from which the bitmap will be generated</param>
         /// <param name="colordepth"> Color depth per pixel for the indexed bitmap</param>
         /// <param name="blackAndWhite"> False->Color / True->B&W defaults to color images</param>
-        /// <returns></returns>
+        /// <returns></returns> 
         public static Bitmap GetIndexedBitmap(Image sourceImage, int colordepth, bool blackAndWhite = false)
         {
             switch (colordepth)

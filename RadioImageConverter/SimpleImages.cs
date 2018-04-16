@@ -5,6 +5,7 @@ using System;
 
 /// <summary>
 /// A series of wrappers for the build in GDI+ System.Drawing meant to simplify image usage and manipulation
+/// Not meant to be the most efficient, but really simple to use
 /// </summary>
 namespace SimpleImages
 {

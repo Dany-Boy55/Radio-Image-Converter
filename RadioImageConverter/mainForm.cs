@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using SimpleImages;
 using System.Windows.Forms;
 using System.Drawing;
@@ -10,6 +11,7 @@ namespace RadioImageConverter
         #region Variables and Objects
         // Used to handle the user's settings between sessions
         private string selectedPath;
+        private string[] multipleImages;
         private Image inputImage, outputImage;
         private bool openMultiple = false;
         // Constants for UI arrangement
@@ -38,6 +40,7 @@ namespace RadioImageConverter
                 label1.Hide();
                 label4.Show();
                 fileName_textBox.Show();
+                export_Button.Text = "Save Image";
                 // Move used elements to the top left of the screen
                 label2.Location = new Point(startLocationX, startLocationY);
             }
@@ -48,6 +51,7 @@ namespace RadioImageConverter
                 label1.Show();
                 label4.Hide();
                 fileName_textBox.Hide();
+                export_Button.Text = "Export Selected";
                 // Move used elements to the top left of the screen
                 label1.Location = new Point(startLocationX, startLocationY);
                 label2.Location = new Point(startLocationX + label1.Width + padding, startLocationY);
@@ -64,7 +68,7 @@ namespace RadioImageConverter
         private void UpdateImages()
         {
             input_PitcureBox.Image = SimpleImageProcessor.Resize(inputImage, new Size(200,170));
-            outputImage = SimpleImageProcessor.Resize(inputImage, new Size(32, 32));
+            outputImage = SimpleImageProcessor.Resize(inputImage, new Size(64, 32));
             outputImage = SimpleImageProcessor.GetIndexedBitmap(outputImage, 4);
             output_PictureBox.Image = outputImage;
         }
@@ -80,7 +84,26 @@ namespace RadioImageConverter
                 if (!openMultiple)
                 {
                     openMultiple = true;
-                    updateUI();
+                }
+                updateUI();
+                foreach (string item in Directory.EnumerateFiles(selectedPath))
+                {
+                    imageSelect_checkListBox.Items.Add(item, CheckState.Checked);
+
+                }
+            }
+        }
+
+        private void export_Button_Click(object sender, EventArgs e)
+        {
+            if (!openMultiple)
+            {
+                FolderBrowserDialog folder = new FolderBrowserDialog();
+                if(folder.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = folder.SelectedPath + "\\" + fileName_textBox.Text + ".bmp";
+                    Console.WriteLine(fileName);
+                    outputImage.Save(fileName);
                 }
             }
         }

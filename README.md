@@ -3,7 +3,7 @@ A simple to use app that lets you create custom images for your radio control sy
 
 Functionality thus far:
 - Import a single image file
-- Convert a single image into a 32x32 indexed 4BPP bitmap (Taranis X9D)
+- Convert a single image into a 64x32 indexed 4BPP bitmap (Taranis X9D)
 
 Functionality to be added for basic functionality:
 - Save the converted image to a bitmap

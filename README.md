@@ -1,5 +1,6 @@
 # Radio Image Converter
 A simple to use app that lets you create custom images for your radio control system
+Simply select a photo, and convert it to a Taranis X9D compatible format with a single click!
 
 Functionality thus far:
 - Import a single image file
@@ -9,8 +10,12 @@ Functionality thus far:
 Functionality to be added for basic functionality:
 - Allow different image formats for different radio systems
 
+Bugs to be squashed:
+- Trying to export with no input image
+
 Possible features to be implemented in future releases:
 - Process multiple image files at once
+- Add more image parameters for other radio systems
 - Add the ability to create splash screens for OpenTX radios
 
 Right now the code is functional but not really usable, you must build the solution yourself. 

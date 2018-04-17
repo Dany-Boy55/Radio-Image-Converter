@@ -5,6 +5,7 @@ using System;
 
 /// <summary>
 /// A series of wrappers for the build in GDI+ System.Drawing meant to simplify image usage and manipulation
+/// Not meant to be the most efficient, but really simple to use
 /// </summary>
 namespace SimpleImages
 {
@@ -19,7 +20,7 @@ namespace SimpleImages
         /// <param name="sourceImage"> Image from which the bitmap will be generated</param>
         /// <param name="colordepth"> Color depth per pixel for the indexed bitmap</param>
         /// <param name="blackAndWhite"> False->Color / True->B&W defaults to color images</param>
-        /// <returns></returns>
+        /// <returns></returns> 
         public static Bitmap GetIndexedBitmap(Image sourceImage, int colordepth, bool blackAndWhite = false)
         {
             switch (colordepth)

@@ -36,6 +36,15 @@
             this.openMultipleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bisPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bitsPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageSelect_checkListBox = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,15 +54,6 @@
             this.fileName_textBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.export_Button = new System.Windows.Forms.Button();
-            this.resolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bisPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bitsPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fullColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.input_PitcureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.output_PictureBox)).BeginInit();
@@ -67,7 +67,7 @@
             this.imageSettingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(429, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(433, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -111,6 +111,68 @@
             this.imageSettingsToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
             this.imageSettingsToolStripMenuItem.Text = "Image Settings";
             // 
+            // resolutionToolStripMenuItem
+            // 
+            this.resolutionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.x32ToolStripMenuItem,
+            this.x64ToolStripMenuItem,
+            this.customToolStripMenuItem});
+            this.resolutionToolStripMenuItem.Name = "resolutionToolStripMenuItem";
+            this.resolutionToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.resolutionToolStripMenuItem.Text = "Resolution";
+            // 
+            // x32ToolStripMenuItem
+            // 
+            this.x32ToolStripMenuItem.Name = "x32ToolStripMenuItem";
+            this.x32ToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.x32ToolStripMenuItem.Text = "32x32";
+            // 
+            // x64ToolStripMenuItem
+            // 
+            this.x64ToolStripMenuItem.Name = "x64ToolStripMenuItem";
+            this.x64ToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.x64ToolStripMenuItem.Text = "64x64";
+            // 
+            // customToolStripMenuItem
+            // 
+            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.customToolStripMenuItem.Text = "Custom...";
+            // 
+            // colorFormatToolStripMenuItem
+            // 
+            this.colorFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bisPerPixelindexedToolStripMenuItem,
+            this.bitsPerPixelindexedToolStripMenuItem,
+            this.fullColorToolStripMenuItem});
+            this.colorFormatToolStripMenuItem.Name = "colorFormatToolStripMenuItem";
+            this.colorFormatToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.colorFormatToolStripMenuItem.Text = "Color Format";
+            // 
+            // bisPerPixelindexedToolStripMenuItem
+            // 
+            this.bisPerPixelindexedToolStripMenuItem.Name = "bisPerPixelindexedToolStripMenuItem";
+            this.bisPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.bisPerPixelindexedToolStripMenuItem.Text = "4 bis per pixel (indexed)";
+            // 
+            // bitsPerPixelindexedToolStripMenuItem
+            // 
+            this.bitsPerPixelindexedToolStripMenuItem.Name = "bitsPerPixelindexedToolStripMenuItem";
+            this.bitsPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.bitsPerPixelindexedToolStripMenuItem.Text = "8 bits per pixel (indexed)";
+            // 
+            // fullColorToolStripMenuItem
+            // 
+            this.fullColorToolStripMenuItem.Name = "fullColorToolStripMenuItem";
+            this.fullColorToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.fullColorToolStripMenuItem.Text = "Full color";
+            // 
+            // fileTypeToolStripMenuItem
+            // 
+            this.fileTypeToolStripMenuItem.Name = "fileTypeToolStripMenuItem";
+            this.fileTypeToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.fileTypeToolStripMenuItem.Text = "File type";
+            // 
             // imageSelect_checkListBox
             // 
             this.imageSelect_checkListBox.FormattingEnabled = true;
@@ -118,6 +180,7 @@
             this.imageSelect_checkListBox.Name = "imageSelect_checkListBox";
             this.imageSelect_checkListBox.Size = new System.Drawing.Size(120, 191);
             this.imageSelect_checkListBox.TabIndex = 1;
+            this.imageSelect_checkListBox.SelectedIndexChanged += new System.EventHandler(this.imageSelect_checkListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -144,6 +207,7 @@
             this.input_PitcureBox.Size = new System.Drawing.Size(200, 170);
             this.input_PitcureBox.TabIndex = 4;
             this.input_PitcureBox.TabStop = false;
+            this.input_PitcureBox.DoubleClick += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // label3
             // 
@@ -168,6 +232,7 @@
             this.fileName_textBox.Name = "fileName_textBox";
             this.fileName_textBox.Size = new System.Drawing.Size(100, 22);
             this.fileName_textBox.TabIndex = 7;
+            this.fileName_textBox.TextChanged += new System.EventHandler(this.fileName_textBox_TextChanged);
             // 
             // label4
             // 
@@ -188,73 +253,11 @@
             this.export_Button.UseVisualStyleBackColor = true;
             this.export_Button.Click += new System.EventHandler(this.export_Button_Click);
             // 
-            // resolutionToolStripMenuItem
-            // 
-            this.resolutionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x32ToolStripMenuItem,
-            this.x64ToolStripMenuItem,
-            this.customToolStripMenuItem});
-            this.resolutionToolStripMenuItem.Name = "resolutionToolStripMenuItem";
-            this.resolutionToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.resolutionToolStripMenuItem.Text = "Resolution";
-            // 
-            // colorFormatToolStripMenuItem
-            // 
-            this.colorFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bisPerPixelindexedToolStripMenuItem,
-            this.bitsPerPixelindexedToolStripMenuItem,
-            this.fullColorToolStripMenuItem});
-            this.colorFormatToolStripMenuItem.Name = "colorFormatToolStripMenuItem";
-            this.colorFormatToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.colorFormatToolStripMenuItem.Text = "Color Format";
-            // 
-            // fileTypeToolStripMenuItem
-            // 
-            this.fileTypeToolStripMenuItem.Name = "fileTypeToolStripMenuItem";
-            this.fileTypeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.fileTypeToolStripMenuItem.Text = "File type";
-            // 
-            // x32ToolStripMenuItem
-            // 
-            this.x32ToolStripMenuItem.Name = "x32ToolStripMenuItem";
-            this.x32ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.x32ToolStripMenuItem.Text = "32x32";
-            // 
-            // x64ToolStripMenuItem
-            // 
-            this.x64ToolStripMenuItem.Name = "x64ToolStripMenuItem";
-            this.x64ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.x64ToolStripMenuItem.Text = "64x64";
-            // 
-            // customToolStripMenuItem
-            // 
-            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.customToolStripMenuItem.Text = "Custom...";
-            // 
-            // bisPerPixelindexedToolStripMenuItem
-            // 
-            this.bisPerPixelindexedToolStripMenuItem.Name = "bisPerPixelindexedToolStripMenuItem";
-            this.bisPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.bisPerPixelindexedToolStripMenuItem.Text = "4 bis per pixel (indexed)";
-            // 
-            // bitsPerPixelindexedToolStripMenuItem
-            // 
-            this.bitsPerPixelindexedToolStripMenuItem.Name = "bitsPerPixelindexedToolStripMenuItem";
-            this.bitsPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.bitsPerPixelindexedToolStripMenuItem.Text = "8 bits per pixel (indexed)";
-            // 
-            // fullColorToolStripMenuItem
-            // 
-            this.fullColorToolStripMenuItem.Name = "fullColorToolStripMenuItem";
-            this.fullColorToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.fullColorToolStripMenuItem.Text = "Full color";
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 290);
+            this.ClientSize = new System.Drawing.Size(433, 285);
             this.Controls.Add(this.export_Button);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.fileName_textBox);
@@ -267,7 +270,8 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "mainForm";
-            this.Text = "Form1";
+            this.Text = "Image Converter";
+            this.ResizeEnd += new System.EventHandler(this.mainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.input_PitcureBox)).EndInit();

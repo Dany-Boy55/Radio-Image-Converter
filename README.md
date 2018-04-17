@@ -3,9 +3,9 @@ A simple to use app that lets you create custom images for your radio control sy
 Simply select a photo, and convert it to a Taranis X9D compatible format with a single click!
 
 Functionality thus far:
-- Import a single image file
+- Import a single and multiple image files
 - Convert a single image into a 64x32 indexed 4BPP bitmap (Taranis X9D)
-- Save the converted image to a bitmap
+- Save the single converted image to a bitmap
 
 Functionality to be added for basic functionality:
 - Allow different image formats for different radio systems

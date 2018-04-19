@@ -3,24 +3,30 @@ using System.IO;
 using SimpleImages;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace RadioImageConverter
 {
     public partial class mainForm : Form
     {
         #region Variables and Objects
+#if DEBUG
+        private string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+#endif
         // Used to handle the user's settings between sessions
-        private string selectedPath;
+        private string importPath;
+        private string exportPath;
+        private string imageName;
         private string[] imageFileNames;
         private Image inputImage, outputImage;
         private bool openMultiple = false;
-        private string imageName = "";
         // Constants for UI arrangement
         private const int padding = 9;
         private const int startLocationX = 12;
         private const int startLocationY = 28;
         private const int maxChar = 6;
         // Constants for Image settings
+        private string[] messages = {"Select an Image" , "Select a source Folder", ""};
         private char[] disallowedChars = { ' ', ',', '.', '-', '_'};
         #endregion
 
@@ -29,8 +35,10 @@ namespace RadioImageConverter
         /// </summary>
         public mainForm()
         {
+#if DEBUG
+            Debug.WriteLine("Debug mode enabled\t" + version);
+#endif
             InitializeComponent();
-            //this.BackColor = SystemColors.;
             UpdateUI();
         }
 
@@ -63,8 +71,6 @@ namespace RadioImageConverter
                 label1.Location = new Point(startLocationX, startLocationY);
                 label2.Location = new Point(startLocationX + imageSelect_checkListBox.Width + padding, startLocationY);
             }
-            if (outputImage == null)
-                export_Button.Enabled = false;
             // Adjust the rest of the elements accordingly
             input_PitcureBox.Location = new Point(label2.Location.X, startLocationY + label2.Height + padding);
             label3.Location = new Point(label2.Location.X + input_PitcureBox.Width + padding, startLocationY);
@@ -76,9 +82,13 @@ namespace RadioImageConverter
         /// </summary>
         private void UpdateImages()
         {
-            input_PitcureBox.Image = SimpleImageProcessor.Resize(inputImage, new Size(200,170));
+            // Show input Image with correct picturebox size
+            input_PitcureBox.Image = SimpleImageProcessor.Resize(inputImage, input_PitcureBox.Size);
+            // Convert output image with desired parameters
             outputImage = SimpleImageProcessor.Resize(inputImage, new Size(64, 32));
             outputImage = SimpleImageProcessor.GetIndexedBitmap(outputImage, 4);
+            // Show output image
+            output_PictureBox.Size = outputImage.Size;
             output_PictureBox.Image = outputImage;
         }
 
@@ -92,14 +102,14 @@ namespace RadioImageConverter
             FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
             if (folderBrowser.ShowDialog() == DialogResult.OK)
             {
-                selectedPath = folderBrowser.SelectedPath;
+                importPath = folderBrowser.SelectedPath;
                 if (!openMultiple)
                 {
                     openMultiple = true;
                 }
-                imageFileNames = Directory.GetFiles(selectedPath);
+                imageFileNames = Directory.GetFiles(importPath);
                 UpdateUI();
-                foreach (string item in Directory.EnumerateFiles(selectedPath))
+                foreach (string item in Directory.EnumerateFiles(importPath))
                 {
                     if(item.Contains(".jpg") || item.Contains(".bmp") || item.Contains(".png"))
                     {
@@ -117,23 +127,19 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void export_Button_Click(object sender, EventArgs e)
         {
-            if (!openMultiple)
+            if (outputImage == null)
+                MessageBox.Show("please import an image first", "Error while exporting");
+            else
+                if (exportPath == null)
+                    exportFolderToolStripMenuItem_Click(new object(), new EventArgs());
+            try
             {
-                FolderBrowserDialog folder = new FolderBrowserDialog();
-                if(folder.ShowDialog() == DialogResult.OK)
-                {
-                    string fileName = folder.SelectedPath + "\\" + fileName_textBox.Text + ".bmp";
-                    Console.WriteLine(fileName);
-                    try
-                    {
-                        outputImage.Save(fileName);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Error while saving output image");
-                    }
-                    
-                }
+                outputImage.Save(exportPath + "/" + imageName + ".bmp");
+                MessageBox.Show("Image " + imageName + " saved to " + exportPath, "Export successful!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error while exporting");
             }
         }
 
@@ -174,10 +180,57 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void imageSelect_checkListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Show the user the image they selcted (not very elegant implementation but works for now)
             string fileName = ((CheckedListBox)sender).SelectedItem.ToString();
             fileName = fileName.Replace("\\","/");
             inputImage = Image.FromFile(fileName);
             UpdateImages();
+        }
+
+        private void exportFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.InitialDirectory = "@C:/Users/" + Environment.UserName + "/";
+            saveDialog.Title = "Select a folder for export";
+            saveDialog.FileName = "Save Exports Here";
+            saveDialog.OverwritePrompt = false;
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                exportPath = Path.GetDirectoryName(saveDialog.FileName);
+                exportPath = exportPath.Replace("\\", "/");
+            }
+        }
+
+        private void viewFullSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fullSizeImageForm = new Form();
+            fullSizeImageForm.BackgroundImage = inputImage;
+            fullSizeImageForm.Size = inputImage.Size;
+            fullSizeImageForm.Show();
+        }
+
+        /// <summary>
+        /// Called when the user completes a drag drop into the app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            // If the dropped item is not an image, ignore it
+            if (e.Data.GetDataPresent(typeof(Bitmap)))
+            {
+                inputImage = (Bitmap)e.Data.GetData(typeof(Bitmap));
+                Debug.WriteLine(e.Data.GetType().ToString());
+                UpdateImages();
+            }
+        }
+
+        private void mainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+                e.Effect = DragDropEffects.Link;
+            else
+                e.Effect = DragDropEffects.None;
         }
 
         /// <summary>
@@ -187,20 +240,27 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Promt the user to select a single image file
             OpenFileDialog openFile = new OpenFileDialog();
             string defaultpath = "@C:/Users" + Environment.UserName + "/Pictures";
             openFile.InitialDirectory = defaultpath;
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                inputImage = Image.FromFile(openFile.FileName);
-                Console.WriteLine(openFile.FileName);
-                imageName = openFile.SafeFileName.Trim();
+                // Retrieve the filename with path from the selected image
+                string fileName = openFile.FileName;
+                // Separate path and the filename no extension
+                importPath = Path.GetFullPath(fileName);
+                imageName = Path.GetFileNameWithoutExtension(fileName);
+                // Load the image
+                inputImage = Image.FromFile(fileName);
                 fileName_textBox.Text = imageName;
+                // Change the UI accordingly
                 if (openMultiple)
                 {
                     openMultiple = false;
                     UpdateUI();
                 }
+                // Presenet the new images
                 UpdateImages();
             }
         }

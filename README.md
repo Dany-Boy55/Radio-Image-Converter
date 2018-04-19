@@ -3,22 +3,23 @@ A simple to use app that lets you create custom images for your radio control sy
 Simply select a photo, and convert it to a Taranis X9D compatible format with a single click!
 
 Functionality thus far:
-- Import a single and multiple image files
+- Import a single image file:
+  - By double clikcing the source image space
+  - By going into the file menu and clikcing import
+  - By drag-dropping an image into the app (buggy)
 - Convert a single image into a 64x32 indexed 4BPP bitmap (Taranis X9D)
-- Save the single converted image to a bitmap
-
-Functionality to be added for basic functionality:
-- Allow different image formats for different radio systems
+- Naming the image file with OpenTX conventions
+- Auto-Scale UI to propperly display all elements when resizing the main form
+- Save the single converted image to a bitmap file to a user selected folder
 
 Bugs to be squashed:
-- Trying to export with no input image
+- Drag drop image import not recognizing some images (still not clear which)
 
 Possible features to be implemented in future releases:
 - Process multiple image files at once
 - Add more image parameters for other radio systems
 - Add the ability to create splash screens for OpenTX radios
 
-Right now the code is functional but not really usable, you must build the solution yourself. 
-When I'm fairly happy with the result, I will provide a compiled app that can be easily used. 
+Code is functional and usable! Check the [Releases](../Dany-Boy55/Radio-Image-Converter) tab for a compiled ready to use app!
 
 Feel free to report any sort of bugs that you may find. Also let me know if you want a special feature added and I'll see what I can do!

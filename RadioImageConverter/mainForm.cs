@@ -201,12 +201,23 @@ namespace RadioImageConverter
             }
         }
 
+        /// <summary>
+        /// Called when the user clicks the view full size image menu option
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewFullSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fullSizeImageForm = new Form();
-            fullSizeImageForm.BackgroundImage = inputImage;
-            fullSizeImageForm.Size = inputImage.Size;
-            fullSizeImageForm.Show();
+            if (inputImage == null)
+                MessageBox.Show("Please import an image first", "Error");
+            else
+            {
+                // Show in a new form 
+                Form fullSizeImageForm = new Form();
+                fullSizeImageForm.BackgroundImage = inputImage;
+                fullSizeImageForm.Size = inputImage.Size;
+                fullSizeImageForm.Show();
+            }
         }
 
         /// <summary>

@@ -39,6 +39,7 @@ namespace RadioImageConverter
             Debug.WriteLine("Debug mode enabled\t" + version);
 #endif
             InitializeComponent();
+            // As soon as the form shows, make sure the UI elements are propperly sized
             UpdateUI();
         }
 

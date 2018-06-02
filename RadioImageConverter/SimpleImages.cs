@@ -4,15 +4,16 @@ using System.Drawing;
 using System;
 
 /// <summary>
-/// A series of wrappers for the build in GDI+ System.Drawing meant to simplify image usage and manipulation
-/// Not meant to be the most efficient, but really simple to use
+/// A series of wrappers for the build in GDI+ System.Drawing
+/// Meant to simplify image usage and manipulation
+/// Not really efficient (for now), but really simple to use
 /// </summary>
 namespace SimpleImages
 {
     /// <summary>
-    /// An abstract class that provides static methods for high level image manipulation
+    /// An abstract class that provides static methods for (X,Y) image manipulation
     /// </summary>
-    public abstract class SimpleImageProcessor
+    public abstract class CartesianTransforms
     {
         /// <summary>
         /// Returns an indexed bitmap of the specified image with the specified parameters
@@ -109,6 +110,14 @@ namespace SimpleImages
             }
             return targetImage;
         }
+    }
+
+    /// <summary>
+    /// An abstract class that provides static methods for (r,theta) image manipulation
+    /// </summary>
+    public abstract class PolarTransforms
+    {
+
     }
 
     /// <summary>

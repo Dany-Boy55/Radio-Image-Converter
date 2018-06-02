@@ -17,7 +17,8 @@ namespace RadioImageConverter
         private string importPath;
         private string exportPath;
         private string imageName;
-        private string[] imageFileNames;
+        private string[] imageFilePaths;
+        private string[] imageNames;
         private Image inputImage, outputImage;
         private bool openMultiple = false;
         // Constants for UI arrangement
@@ -26,7 +27,6 @@ namespace RadioImageConverter
         private const int startLocationY = 28;
         private const int maxChar = 6;
         // Constants for Image settings
-        private string[] messages = {"Select an Image" , "Select a source Folder", ""};
         private char[] disallowedChars = { ' ', ',', '.', '-', '_'};
         #endregion
 
@@ -68,6 +68,11 @@ namespace RadioImageConverter
                 label4.Hide();
                 fileName_textBox.Hide();
                 export_Button.Text = "Export Selected";
+                foreach (var item in imageNames)
+                {
+                    if(item != null)
+                        imageSelect_checkListBox.Items.Add(item);
+                }
                 // Move used elements to the top left of the screen
                 label1.Location = new Point(startLocationX, startLocationY);
                 label2.Location = new Point(startLocationX + imageSelect_checkListBox.Width + padding, startLocationY);
@@ -84,10 +89,10 @@ namespace RadioImageConverter
         private void UpdateImages()
         {
             // Show input Image with correct picturebox size
-            input_PitcureBox.Image = SimpleImageProcessor.Resize(inputImage, input_PitcureBox.Size);
+            input_PitcureBox.Image = CartesianTransforms.Resize(inputImage, input_PitcureBox.Size);
             // Convert output image with desired parameters
-            outputImage = SimpleImageProcessor.Resize(inputImage, new Size(64, 32));
-            outputImage = SimpleImageProcessor.GetIndexedBitmap(outputImage, 4);
+            outputImage = CartesianTransforms.Resize(inputImage, new Size(64, 32));
+            outputImage = CartesianTransforms.GetIndexedBitmap(outputImage, 4);
             // Show output image
             output_PictureBox.Size = outputImage.Size;
             output_PictureBox.Image = outputImage;
@@ -108,7 +113,7 @@ namespace RadioImageConverter
                 {
                     openMultiple = true;
                 }
-                imageFileNames = Directory.GetFiles(importPath);
+                imageFilePaths = Directory.GetFiles(importPath);
                 UpdateUI();
                 foreach (string item in Directory.EnumerateFiles(importPath))
                 {
@@ -120,6 +125,26 @@ namespace RadioImageConverter
                 }
             }
         }
+        // Stores all valid images in a directory within 'imageFilePaths' and 'imageNames'
+        private void importMultiple(string dirPath)
+        {
+            string[] files = Directory.GetFiles(dirPath);
+            // Get all file names within the dir
+            string temppath = files[0];
+            files = Directory.GetFiles(temppath);
+            // if the files are not images delete them from the array
+            for (int i = 0; i < files.Length; i++)
+            {
+                if (Path.GetExtension(files[i]) != ".png" && Path.GetExtension(files[i]) != ".jpg")
+                    files[i] = null;
+            }
+            imageFilePaths = files;
+            imageNames = files;
+            for (int i = 0; i < imageFilePaths.Length; i++)
+            {
+                imageNames[i] = Path.GetFileNameWithoutExtension( imageFilePaths[i]);
+            }
+        }
 
         /// <summary>
         /// Called when the user tries to export output image
@@ -128,11 +153,13 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void export_Button_Click(object sender, EventArgs e)
         {
+            // Check to see that everything we need is there, otherwise inform the user
             if (outputImage == null)
                 MessageBox.Show("please import an image first", "Error while exporting");
             else
                 if (exportPath == null)
                     exportFolderToolStripMenuItem_Click(new object(), new EventArgs());
+            // If all is there, try to save the output image
             try
             {
                 outputImage.Save(exportPath + "/" + imageName + ".bmp");
@@ -151,15 +178,8 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void fileName_textBox_TextChanged(object sender, EventArgs e)
         {
-            imageName = fileName_textBox.Text;
-            // fileName no larger than maxNameLength depends on the particular radio system
-            if(imageName.Length >= 10)
-            {
-                imageName = imageName.Remove(0, imageName.Length - 10);
-                fileName_textBox.Text = imageName;
-            }
-            // fileName cannot contain disallowedCharacters
-            imageName = imageName.Trim(disallowedChars);
+            string _name = fileName_textBox.Text;
+            
         }
 
         /// <summary>
@@ -188,6 +208,11 @@ namespace RadioImageConverter
             UpdateImages();
         }
 
+        /// <summary>
+        /// Called when the user clicks on the menu option to change the export folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
@@ -228,21 +253,71 @@ namespace RadioImageConverter
         /// <param name="e"></param>
         private void mainForm_DragDrop(object sender, DragEventArgs e)
         {
-            // If the dropped item is not an image, ignore it
-            if (e.Data.GetDataPresent(typeof(Bitmap)))
+            // retrieve all the the paths that the user retreived
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            // Determine if its a single file, a directory, or multiple files
+            if(files.Length == 1)
             {
-                inputImage = (Bitmap)e.Data.GetData(typeof(Bitmap));
-                Debug.WriteLine(e.Data.GetType().ToString());
-                UpdateImages();
+                // The user droped a directory, open it and get all images in there
+                if (!Path.HasExtension(files[0]))
+                {
+                    // Get all file names within the dir
+                    importMultiple(files[0]);
+                }
+
             }
+            else
+            {
+                openMultiple = true;
+                // If there are multiple paths, store only those that are images
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if (Path.GetExtension(files[i]) != ".png" &&  Path.GetExtension(files[i]) != ".jpg")
+                        files[i] = null;
+                }
+                imageFilePaths = files;
+                imageNames = files;
+                for (int i = 0; i < imageFilePaths.Length; i++)
+                {
+                    imageNames[i] = Path.GetFileNameWithoutExtension(imageFilePaths[i]);
+                }
+            }
+            UpdateUI();
         }
 
+        /// <summary>
+        /// Called when the user starts a drag operation in the main form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainForm_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+            // Anything coming from file browser is treated as a file
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) || e.Data.GetDataPresent(DataFormats.Bitmap))
+            {
                 e.Effect = DragDropEffects.Link;
+            }
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        /// <summary>
+        /// Method to ensure the name of the image is valid for a radio system
+        /// </summary>
+        /// <param name="_name">original name to be validated</param>
+        /// <returns>Valid image name for a radio system</returns>
+        private string validImageName(string _name)
+        {
+            // fileName no larger than maxNameLength: depends on the particular radio system
+            if (_name.Length >= 10)
+                _name = _name.Remove(0, imageName.Length - 10);
+            // fileName cannot start with a number
+            if (Char.IsNumber(_name[0]))
+                _name = _name.Remove(0, 1);
+            // fileName cannot contain disallowedCharacters
+            imageName = imageName.Trim(disallowedChars);
+            fileName_textBox.Text = _name;
+            return _name;
         }
 
         /// <summary>
@@ -276,5 +351,6 @@ namespace RadioImageConverter
                 UpdateImages();
             }
         }
+        
     }
 }

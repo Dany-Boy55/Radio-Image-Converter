@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.imageSelect_checkListBox = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,22 +47,8 @@
             this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
-            this.colorFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bitPerPixelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bisPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bitsPerPixelindexedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fullColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bitmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.jpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.defaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.presetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taranisX9DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewFullSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.input_PitcureBox)).BeginInit();
@@ -179,7 +166,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(262, 30);
-            this.openToolStripMenuItem.Text = "Import";
+            this.openToolStripMenuItem.Text = "Import Image";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // openMultipleToolStripMenuItem
@@ -187,7 +174,6 @@
             this.openMultipleToolStripMenuItem.Name = "openMultipleToolStripMenuItem";
             this.openMultipleToolStripMenuItem.Size = new System.Drawing.Size(262, 30);
             this.openMultipleToolStripMenuItem.Text = "Import Multiple...";
-            this.openMultipleToolStripMenuItem.Visible = false;
             this.openMultipleToolStripMenuItem.Click += new System.EventHandler(this.openMultipleToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
@@ -208,143 +194,36 @@
             // 
             this.imageSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resolutionToolStripMenuItem,
-            this.colorFormatToolStripMenuItem,
-            this.fileTypeToolStripMenuItem,
-            this.defaultsToolStripMenuItem,
+            this.presetsToolStripMenuItem,
             this.viewFullSizeToolStripMenuItem});
             this.imageSettingsToolStripMenuItem.Name = "imageSettingsToolStripMenuItem";
-            this.imageSettingsToolStripMenuItem.Size = new System.Drawing.Size(143, 29);
-            this.imageSettingsToolStripMenuItem.Text = "Image Settings";
+            this.imageSettingsToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
+            this.imageSettingsToolStripMenuItem.Text = "Options";
             // 
             // resolutionToolStripMenuItem
             // 
-            this.resolutionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x32ToolStripMenuItem,
-            this.x64ToolStripMenuItem});
             this.resolutionToolStripMenuItem.Name = "resolutionToolStripMenuItem";
-            this.resolutionToolStripMenuItem.Size = new System.Drawing.Size(201, 30);
-            this.resolutionToolStripMenuItem.Text = "Resolution";
+            this.resolutionToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.resolutionToolStripMenuItem.Text = "Export Settings";
             // 
-            // x32ToolStripMenuItem
+            // presetsToolStripMenuItem
             // 
-            this.x32ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripTextBox1});
-            this.x32ToolStripMenuItem.Name = "x32ToolStripMenuItem";
-            this.x32ToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
-            this.x32ToolStripMenuItem.Text = "Horizontal";
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 31);
-            this.toolStripTextBox1.Text = "64";
-            // 
-            // x64ToolStripMenuItem
-            // 
-            this.x64ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripTextBox2});
-            this.x64ToolStripMenuItem.Name = "x64ToolStripMenuItem";
-            this.x64ToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
-            this.x64ToolStripMenuItem.Text = "Vertical";
-            // 
-            // toolStripTextBox2
-            // 
-            this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(100, 31);
-            this.toolStripTextBox2.Text = "32";
-            // 
-            // colorFormatToolStripMenuItem
-            // 
-            this.colorFormatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bitPerPixelToolStripMenuItem,
-            this.bisPerPixelindexedToolStripMenuItem,
-            this.bitsPerPixelindexedToolStripMenuItem,
-            this.fullColorToolStripMenuItem});
-            this.colorFormatToolStripMenuItem.Name = "colorFormatToolStripMenuItem";
-            this.colorFormatToolStripMenuItem.Size = new System.Drawing.Size(201, 30);
-            this.colorFormatToolStripMenuItem.Text = "Color Format";
-            // 
-            // bitPerPixelToolStripMenuItem
-            // 
-            this.bitPerPixelToolStripMenuItem.Name = "bitPerPixelToolStripMenuItem";
-            this.bitPerPixelToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
-            this.bitPerPixelToolStripMenuItem.Text = "1 bit per pixel (indexed)";
-            // 
-            // bisPerPixelindexedToolStripMenuItem
-            // 
-            this.bisPerPixelindexedToolStripMenuItem.Checked = true;
-            this.bisPerPixelindexedToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.bisPerPixelindexedToolStripMenuItem.Name = "bisPerPixelindexedToolStripMenuItem";
-            this.bisPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
-            this.bisPerPixelindexedToolStripMenuItem.Text = "4 bis per pixel (indexed)";
-            // 
-            // bitsPerPixelindexedToolStripMenuItem
-            // 
-            this.bitsPerPixelindexedToolStripMenuItem.Name = "bitsPerPixelindexedToolStripMenuItem";
-            this.bitsPerPixelindexedToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
-            this.bitsPerPixelindexedToolStripMenuItem.Text = "8 bits per pixel (indexed)";
-            // 
-            // fullColorToolStripMenuItem
-            // 
-            this.fullColorToolStripMenuItem.Name = "fullColorToolStripMenuItem";
-            this.fullColorToolStripMenuItem.Size = new System.Drawing.Size(318, 30);
-            this.fullColorToolStripMenuItem.Text = "32 bits per pixel (with alpha)";
-            // 
-            // fileTypeToolStripMenuItem
-            // 
-            this.fileTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bitmapToolStripMenuItem,
-            this.jpegToolStripMenuItem,
-            this.pngToolStripMenuItem});
-            this.fileTypeToolStripMenuItem.Name = "fileTypeToolStripMenuItem";
-            this.fileTypeToolStripMenuItem.Size = new System.Drawing.Size(201, 30);
-            this.fileTypeToolStripMenuItem.Text = "File type";
-            // 
-            // bitmapToolStripMenuItem
-            // 
-            this.bitmapToolStripMenuItem.Checked = true;
-            this.bitmapToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.bitmapToolStripMenuItem.Name = "bitmapToolStripMenuItem";
-            this.bitmapToolStripMenuItem.Size = new System.Drawing.Size(209, 30);
-            this.bitmapToolStripMenuItem.Text = "Bitmap (.bmp)";
-            // 
-            // jpegToolStripMenuItem
-            // 
-            this.jpegToolStripMenuItem.Name = "jpegToolStripMenuItem";
-            this.jpegToolStripMenuItem.Size = new System.Drawing.Size(209, 30);
-            this.jpegToolStripMenuItem.Text = "Jpeg (.jpg)";
-            // 
-            // pngToolStripMenuItem
-            // 
-            this.pngToolStripMenuItem.Name = "pngToolStripMenuItem";
-            this.pngToolStripMenuItem.Size = new System.Drawing.Size(209, 30);
-            this.pngToolStripMenuItem.Text = "Png (.png)";
-            // 
-            // defaultsToolStripMenuItem
-            // 
-            this.defaultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.taranisX9DToolStripMenuItem,
-            this.horusToolStripMenuItem});
-            this.defaultsToolStripMenuItem.Name = "defaultsToolStripMenuItem";
-            this.defaultsToolStripMenuItem.Size = new System.Drawing.Size(201, 30);
-            this.defaultsToolStripMenuItem.Text = "Defaults";
+            this.presetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.taranisX9DToolStripMenuItem});
+            this.presetsToolStripMenuItem.Name = "presetsToolStripMenuItem";
+            this.presetsToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.presetsToolStripMenuItem.Text = "Presets";
             // 
             // taranisX9DToolStripMenuItem
             // 
             this.taranisX9DToolStripMenuItem.Name = "taranisX9DToolStripMenuItem";
-            this.taranisX9DToolStripMenuItem.Size = new System.Drawing.Size(149, 30);
-            this.taranisX9DToolStripMenuItem.Text = "Taranis";
-            // 
-            // horusToolStripMenuItem
-            // 
-            this.horusToolStripMenuItem.Name = "horusToolStripMenuItem";
-            this.horusToolStripMenuItem.Size = new System.Drawing.Size(149, 30);
-            this.horusToolStripMenuItem.Text = "Horus";
+            this.taranisX9DToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.taranisX9DToolStripMenuItem.Text = "Taranis X9D";
             // 
             // viewFullSizeToolStripMenuItem
             // 
             this.viewFullSizeToolStripMenuItem.Name = "viewFullSizeToolStripMenuItem";
-            this.viewFullSizeToolStripMenuItem.Size = new System.Drawing.Size(201, 30);
+            this.viewFullSizeToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
             this.viewFullSizeToolStripMenuItem.Text = "View Full Size";
             this.viewFullSizeToolStripMenuItem.Click += new System.EventHandler(this.viewFullSizeToolStripMenuItem_Click);
             // 
@@ -377,6 +256,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.imageSelect_checkListBox);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(543, 392);
@@ -412,25 +292,11 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resolutionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x32ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripMenuItem x64ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
-        private System.Windows.Forms.ToolStripMenuItem colorFormatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bisPerPixelindexedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bitsPerPixelindexedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fullColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bitmapToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem jpegToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pngToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem defaultsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem taranisX9DToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horusToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem bitPerPixelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewFullSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem presetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taranisX9DToolStripMenuItem;
     }
 }
 
